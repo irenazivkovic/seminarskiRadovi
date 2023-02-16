@@ -15,6 +15,12 @@ class CreateRadsTable extends Migration
     {
         Schema::create('rads', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student');
+            $table->foreignId('profesor');
+            $table->date('datum_predaje');
+            $table->string('naziv');
+ 
+
             $table->timestamps();
         });
     }

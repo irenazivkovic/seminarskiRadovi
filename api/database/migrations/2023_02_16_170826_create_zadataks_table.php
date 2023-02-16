@@ -15,6 +15,11 @@ class CreateZadataksTable extends Migration
     {
         Schema::create('zadataks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->date('rok');
+            $table->integer('koeficijent');
+            $table->string('tema');
+
             $table->timestamps();
         });
     }

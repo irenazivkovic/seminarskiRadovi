@@ -15,6 +15,12 @@ class CreateKomentarsTable extends Migration
     {
         Schema::create('komentars', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('rad_id');
+            $table->foreignId('profesor_id');
+            $table->integer('ocena');
+            $table->string('opis');
+
+
             $table->timestamps();
         });
     }
