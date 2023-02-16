@@ -9,7 +9,7 @@
              
             <div className="all-events">
               
-               { zadaci .map((z) => (  <p key={z.id}>{z.tema}</p>  ))}
+               { zadaci .map((z) => (  <p key={z.id}>{z.tema} {z.rok} {z.profesor.name}</p>  ))}
                      
                 
     
