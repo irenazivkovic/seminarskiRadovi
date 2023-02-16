@@ -16,7 +16,7 @@ function LoginPage({addToken}) {
         let newUserData = userData; 
       
         newUserData[e.target.name]=e.target.value;  
- 
+        console.log(newUserData)
         setUserData(newUserData);  
  
     }

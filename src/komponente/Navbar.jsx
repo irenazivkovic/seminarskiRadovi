@@ -10,7 +10,7 @@ function Navbar({token}) {
      
     var config = {
       method: 'post',
-      url: '/api/logout',
+      url: 'http://127.0.0.1:8000/api/logout',
       headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`},
     };
  
@@ -25,7 +25,7 @@ function Navbar({token}) {
       window.sessionStorage.setItem('auth_id',null); 
       navigate('/');
       sessionStorage.clear();
-      window.location.reload()
+     
 
     })
     .catch(function (error) {
@@ -55,7 +55,7 @@ function Navbar({token}) {
                 </>
             :
             <>
-                        <Link to="/zadaci" className="navbar-items">Dogadjaji  </Link>
+                        <Link to="/zadaci" className="navbar-items">Zadaci  </Link>
                 
 
                  <Link to="/" className="navbar-items" onClick={handleLogout}>Odjavi se  </Link>

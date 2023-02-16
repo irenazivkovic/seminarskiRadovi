@@ -55,7 +55,7 @@ class AutfController extends Controller
                 'message'=>'Invalid credentials',
             ]);
         }else{
-            if($user->admin==1){
+            if($user->profesor==1){
                 $role='admin';
                 $token = $user->createToken($user->email.'_AdminToken',['server:admin'])->plainTextToken;
                 $response = [
