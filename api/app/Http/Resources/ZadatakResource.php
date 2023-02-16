@@ -18,7 +18,7 @@ class ZadatakResource extends JsonResource
         return [
             'id' => $this->id,
             'tema' => $this->tema,
-            'rok' => $this->rok->format('Y-m-d'),
+            'rok' => $this->rok,
             'koeficijent' => $this->koeficijent,
             'profesor' => User::find($this->user_id),
          

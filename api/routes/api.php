@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get("/zadatak",[ZadatakController::class,'index']);
+
 Route::get("/radovi",[RadController::class,'index']);
 
 Route::post("/register",[AutfController::class,'register']);

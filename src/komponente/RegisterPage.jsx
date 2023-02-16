@@ -12,16 +12,13 @@ function RegisterPage() {
         password:"",
         drzava:""
     });
-    function handleInput(e){ //fja koja se poziva prilikom eventa e
-        //console.log(e); //probaj
-        //kada korisnik unese username i pass hocemo da setujemo te vrednosti u userData
-        let newUserData = userData; //postavimo usera da mu ime bude "" i da mu pass bude ""
-        //e.target.value; predstavlja vrednost koju korisnik unese u polje
+    function handleInput(e){  
+ 
+        let newUserData = userData;  
         newUserData[e.target.name]=e.target.value;
         console.log(newUserData);
-        //console.log(newUserData);//probaj
-        setUserData(newUserData); //podatke koje smo pokupili iz forme sada upisujemo u polje userData
-        //te podatke sada treba da saljemo laravelu, ali to radimo kada korisnik submituje formu
+  
+        setUserData(newUserData);  
     }
     let navigate = useNavigate();
 
@@ -32,7 +29,7 @@ function RegisterPage() {
                 .post("http://127.0.0.1:8000/api/register", userData )
                 .then((res)=>{  
                     console.log(res.data);
-                     //nakonn sto se registruje da ga posaljemo na stranicu za login
+            
                      navigate("/");
                 })
                 .catch(function (error) {
@@ -120,7 +117,7 @@ function RegisterPage() {
 
                 <div className="flex-sb-m w-full p-b-30">
                     <div className="contact100-form-checkbox">
-                         <a href="/login">I already have an account!</a>
+                         <a href="/">I already have an account!</a>
                          
                     </div>
 
