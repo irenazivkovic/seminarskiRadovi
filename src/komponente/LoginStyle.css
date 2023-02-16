@@ -179,7 +179,7 @@ iframe {
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
-
+  background-image: url('https://source.unsplash.com/random/?school');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
