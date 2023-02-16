@@ -9,8 +9,8 @@ class Komentar extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'rad_id',
-        'profesor_id',
+        'rad_id', //spoljni kljuc ka tabeli Rad
+        'profesor_id', //spoljni kljuc ka tabeli User
         'ocena', //procentualno
         'opis' //komentar na oocenu
          
