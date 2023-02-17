@@ -102,7 +102,7 @@ function App() {
             <Route path="/register" element={<RegisterPage  ></RegisterPage>}></Route>
             <Route path="/zadaci" element={<Zadaci  zadaci={zadaci}></Zadaci>}></Route>
 
-            <Route path="/admin/radovi" element={<Radovi radovi={radovi} zadaci={zadaci}  zadatak={zadatakZaPrikazRadova}></Radovi>}></Route>
+            <Route path="/admin/radovi" element={<Radovi radovi={radovi}   zadatak={zadatakZaPrikazRadova}></Radovi>}></Route>
 
             <Route path="/admin/azuriraj" element={<Azuriraj zadatak={zadatakZaAzuriranje}></Azuriraj>}></Route>
 

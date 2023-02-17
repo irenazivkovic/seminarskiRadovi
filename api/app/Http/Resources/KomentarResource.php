@@ -18,7 +18,7 @@ class KomentarResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'rad_id' => Rad::find($this->rad_id),
+            'rad_id' => new RadResource(Rad::find($this->rad_id)),
             'profesor' => User::find($this->profesor_id),
             'ocena' => $this->ocena,
             'opis' => $this->opis,

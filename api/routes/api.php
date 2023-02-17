@@ -5,6 +5,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\RadController;
 use App\Http\Controllers\ZadatakController;
+use App\Models\Komentar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,9 @@ Route::get('/files', [FileController::class, 'index'])->name('files');
 Route::post('/files', [FileController::class, 'upload'])->name('files');   
 
 
+
+Route::get("/komentar",[KomentarController::class,'index']);
+Route::post("/komentar",[KomentarController::class,'store']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {

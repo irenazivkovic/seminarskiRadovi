@@ -1,10 +1,52 @@
+import axios from 'axios';
 import { MDBDataTableV5 } from 'mdbreact';
  
-import React from 'react';
-function Radovi({zadaci,radovi}) {
-
-    function oceni(){
+import React, { useState } from 'react';
+function Radovi({radovi}) {
+    const [komentarData,setKomentarData]=useState({
+       
+        profesor_id:window.sessionStorage.getItem("auth_id"),
+        ocena:51,
+        opis:"Excepturi officia voluptatem facere. Modi eveniet alias totam dignissimos et labore. Voluptate exercitationem rerum quo.",
         
+
+    });
+    function handleInput(e){  
+ 
+        let newKomentarData = komentarData; 
+      
+        newKomentarData[e.target.name]=e.target.value;  
+        console.log(newKomentarData)
+        setKomentarData(newKomentarData);  
+ 
+    }
+ 
+ 
+    function oceni(id){
+        komentarData.rad_id=id;
+        var config = {
+            method: 'post',
+            url: 'http://127.0.0.1:8000/api/komentar?rad?id='+{id},
+            headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`},
+            data:komentarData
+          };
+       
+          
+          axios(config)
+          .then(function (response) {
+           
+            console.log(response);
+            alert("USPEH")
+           
+      
+          })
+          .catch(function (error) {
+           
+            
+            console.log(error);
+            
+      
+          }); 
     }
 
     const [datatable, setDatatable] = React.useState({
@@ -49,7 +91,7 @@ function Radovi({zadaci,radovi}) {
               zadatak:r.zadatak.tema,
               datum_predaje:   r.datum_predaje,
               rad: <a href={`http://127.0.0.1:8000/uploads/${r.file.file_name}`} download target={'_blank'}>OTVORI</a> ,
-              oceni_rad: <><input type="text" /><button className='btn' onClick={()=>oceni}>Oceni</button></>
+              oceni_rad: <><input type="text" name='ocena' onInput={handleInput}/><button className='btn' onClick={()=>oceni(r.id)}>Oceni</button></>
             }
             
     

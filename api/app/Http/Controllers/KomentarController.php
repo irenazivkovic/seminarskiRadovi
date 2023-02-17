@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\KomentarResource;
 use App\Models\Komentar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +16,7 @@ class KomentarController extends Controller
      */
     public function index()
     {
-        //
+        return KomentarResource::collection(Komentar::all());
     }
 
     /**
@@ -41,9 +42,6 @@ class KomentarController extends Controller
             'opis' => 'required|string',
             'profesor_id'=>'required|integer|exists:users,id',
             'rad_id'=>'required|integer|exists:rads,id',
-
-            'koeficijent'=>'required|integer',
-             
             'ocena' => 'required|integer', 
 
              
