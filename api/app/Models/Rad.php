@@ -12,7 +12,7 @@ class Rad extends Model
         'student', //spoljni kljuc ka tabeli user,
         'profesor',//spoljni kljuc ka tabeli user,
         'datum_predaje',
-        'naziv',
+        'file_id', //spoljni kljuc ka tabeli u kojoj cuvamo samo radove
         
 
          

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AutfController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\RadController;
 use App\Http\Controllers\ZadatakController;
@@ -23,6 +24,14 @@ Route::get("/radovi",[RadController::class,'index']);
 
 Route::post("/register",[AutfController::class,'register']);
 Route::post("/login",[AutfController::class,'login']);
+
+
+
+Route::get('/files', [FileController::class, 'index'])->name('files');
+Route::post('/files', [FileController::class, 'upload'])->name('files');   
+
+
+
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
