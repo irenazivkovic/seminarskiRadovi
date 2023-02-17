@@ -11,6 +11,7 @@ import Zadaci from './komponente/Zadaci';
 import axios from 'axios';
 import AdminPocetna from './komponente/AdminPocetna';
 import Dodaj from './komponente/Dodaj';
+import Azuriraj from './komponente/Azuriraj';
  
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -65,8 +66,11 @@ function App() {
       });
   }
 
+  const [zadatakZaAzuriranje,setZAzuriraj] = useState(null)
 
-
+  function setZadatakAzuriraj(zadatak){
+    setZAzuriraj(zadatak)
+  }
 
   return (
     <div className="App">
@@ -77,8 +81,10 @@ function App() {
             <Route path="/register" element={<RegisterPage  ></RegisterPage>}></Route>
             <Route path="/zadaci" element={<Zadaci  zadaci={zadaci}></Zadaci>}></Route>
 
+            <Route path="/admin/azuriraj" element={<Azuriraj zadatak={zadatakZaAzuriranje}></Azuriraj>}></Route>
+
             <Route path="/admin/dodaj" element={<Dodaj></Dodaj>}></Route>
-            <Route path="/admin" element={<AdminPocetna  zadaci={zadaci} obrisi={obrisi}></AdminPocetna>}></Route>
+            <Route path="/admin" element={<AdminPocetna  zadaci={zadaci} obrisi={obrisi} setZadatakAzuriraj={setZadatakAzuriraj}></AdminPocetna>}></Route>
           
            
           </Routes>

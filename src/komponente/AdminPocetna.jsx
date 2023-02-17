@@ -2,14 +2,16 @@ import { BsFillTrashFill, BsPencilFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlinePlus } from 'react-icons/ai';
 import React from 'react';
-function AdminPocetna({zadaci,obrisi}) {
+function AdminPocetna({zadaci,obrisi,setZadatakAzuriraj}) {
     let navigate = useNavigate();
     function dodaj(){
         navigate("/admin/dodaj/");
     }
-    function azuriraj(id){
+    function azuriraj(zadatak){
 
-        
+        setZadatakAzuriraj(zadatak);
+
+        navigate("/admin/azuriraj/");
     }
     console.log(zadaci.filter((z)=>z.profesor.id==window.sessionStorage.getItem("auth_id")))
     return (
@@ -34,7 +36,7 @@ function AdminPocetna({zadaci,obrisi}) {
             </tr>
           </thead>
           <tbody>
-              {zadaci.filter((z)=>z.profesor.id==window.sessionStorage.getItem("auth_id")).map((z)=>(<tr key={z.id}><td>{z.id}</td><td>{z.tema}</td><td>{z.rok}</td><td>{z.koeficijent}</td><td><button className="btn" onClick={() => obrisi(z.id)}><BsFillTrashFill></BsFillTrashFill></button><button className="btn" onClick={() => azuriraj(z.id)}><BsPencilFill></BsPencilFill></button></td></tr>))}
+              {zadaci.filter((z)=>z.profesor.id==window.sessionStorage.getItem("auth_id")).map((z)=>(<tr key={z.id}><td>{z.id}</td><td>{z.tema}</td><td>{z.rok}</td><td>{z.koeficijent}</td><td><button className="btn" onClick={() => obrisi(z.id)}><BsFillTrashFill></BsFillTrashFill></button><button className="btn" onClick={() => azuriraj(z)}><BsPencilFill></BsPencilFill></button></td></tr>))}
             </tbody>
  
       </table>
