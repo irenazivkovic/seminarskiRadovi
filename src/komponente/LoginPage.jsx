@@ -39,6 +39,7 @@ function LoginPage({addToken}) {
                     console.log(res.data[0].token);
                     if(res.data[0].role === 'admin')
                     {
+         
                          navigate("/admin")
                     }
                     else{

@@ -6,7 +6,7 @@ import axios from 'axios';
  
  function Zadaci({zadaci}) {
     
-    const [zadatak_za_modal, setZadatakModal] = useState(null); // zadatak za koji se predaje rad u modalu
+    console.log(zadaci)
 
 
     let sortiranoRastuce = true;

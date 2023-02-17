@@ -12,6 +12,7 @@ import axios from 'axios';
 import AdminPocetna from './komponente/AdminPocetna';
 import Dodaj from './komponente/Dodaj';
 import Azuriraj from './komponente/Azuriraj';
+import Radovi from './komponente/Radovi';
  
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -19,6 +20,7 @@ const axiosInstance = axios.create({
 function App() {
   const[token,setToken] = useState(null);
   const [zadaci,setZadaci] = useState([ ])
+  const [radovi,setRadovi] = useState([ ])
  
 
   useEffect(() => {
@@ -37,7 +39,22 @@ function App() {
     };
     getZadaci();
   }, [ axiosInstance]);
-
+  useEffect(() => {
+    const getRadovi = async () => {
+      try {
+        const res = await axiosInstance.get( "http://127.0.0.1:8000/api/radovi",
+          {
+            headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`},
+          }
+        );
+        setRadovi(res.data.data);
+        console.log(res.data)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getRadovi();
+  }, [ axiosInstance]);
 
 
   function obrisi(id){
@@ -67,11 +84,15 @@ function App() {
   }
 
   const [zadatakZaAzuriranje,setZAzuriraj] = useState(null)
+  const [zadatakZaPrikazRadova,setzRadovi] = useState(null)
+
 
   function setZadatakAzuriraj(zadatak){
     setZAzuriraj(zadatak)
   }
-
+  function setZadatakRadovi(zadatak){
+    setzRadovi(zadatak)
+  }
   return (
     <div className="App">
         <BrowserRouter  >
@@ -81,10 +102,12 @@ function App() {
             <Route path="/register" element={<RegisterPage  ></RegisterPage>}></Route>
             <Route path="/zadaci" element={<Zadaci  zadaci={zadaci}></Zadaci>}></Route>
 
+            <Route path="/admin/radovi" element={<Radovi radovi={radovi} zadaci={zadaci}  zadatak={zadatakZaPrikazRadova}></Radovi>}></Route>
+
             <Route path="/admin/azuriraj" element={<Azuriraj zadatak={zadatakZaAzuriranje}></Azuriraj>}></Route>
 
             <Route path="/admin/dodaj" element={<Dodaj></Dodaj>}></Route>
-            <Route path="/admin" element={<AdminPocetna  zadaci={zadaci} obrisi={obrisi} setZadatakAzuriraj={setZadatakAzuriraj}></AdminPocetna>}></Route>
+            <Route path="/admin" element={<AdminPocetna  zadaci={zadaci} obrisi={obrisi} setZadatakAzuriraj={setZadatakAzuriraj} setZadatakRadovi={setZadatakRadovi}></AdminPocetna>}></Route>
           
            
           </Routes>
