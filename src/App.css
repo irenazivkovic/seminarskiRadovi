@@ -1,0 +1,67 @@
+
+body {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  font-weight: normal;
+ 
+  position: relative;
+ 
+  padding: 0; 
+}
+
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  background-color: #00cecb;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+  align-items: center;
+  min-height: 60px;
+  padding-left: 25px;
+  font-size: large;
+  color: black;
+  text-decoration: none;
+}
+.navbar-items {
+  display: flex;
+  flex-direction: row;
+ 
+  margin-left: 20px;
+  margin-right: 20px;
+
+  text-decoration: none;
+  color: black;
+  font-size: large;
+
+}
+.navbar-items:hover {
+  display: flex;
+  flex-direction: row;
+ 
+  margin-left: 20px;
+  margin-right: 20px;
+
+  text-decoration: none;
+  color: #BF1363;
+  font-size: large;
+
+}
+
+.zadaci{
+  margin: 10%;
+  padding-bottom: 150px;
+}
+ tr> td{
+  height: 75px;
+  text-align: center;
+}
+tr>th{
+  text-align: center;
+}
+.dugme{
+    
+  color: black;
+}
