@@ -2,11 +2,8 @@ import { BsFillTrashFill, BsPencilFill } from 'react-icons/bs';
  
  
 import React from 'react';
-function AdminPocetna({zadaci}) {
-    function obrisi(id){
-
-
-    }
+function AdminPocetna({zadaci,obrisi}) {
+ 
     function azuriraj(id){
 
         
