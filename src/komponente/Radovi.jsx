@@ -1,40 +1,66 @@
- 
+import { MDBDataTableV5 } from 'mdbreact';
  
 import React from 'react';
 function Radovi({zadaci,radovi}) {
- 
-    console.log(radovi.filter((r)=>r.zadatak.profesor.id==window.sessionStorage.getItem("auth_id")))
-    return (
-  
-      <div className='container'>
-          
-        
 
-        <table id="dtBasicExample" className="table table-striped table-bordered table-sm" cellSpacing="0" width="100%">
-          <thead>
-            <tr>
-              <th className="th-sm">ID
-              </th>
-              <th className="th-sm">Student
-              </th>
-              <th className="th-sm">Zadatak
-              </th>
-              <th className="th-sm">Datum predaje
-              </th>
-              <th className="th-sm">Rad
-              </th>
- 
-            </tr>
-          </thead>
-          <tbody>
-              {radovi.map((r)=>(<tr key={r.id}><td>{r.id}</td><td>{r.student.name}</td><td>{r.zadatak.tema}</td><td>{r.datum_predaje}</td><td><a href={`http://127.0.0.1:8000/uploads/${r.file.file_name}`} download target={'_blank'}>PREUZMI</a></td></tr>))}
-            </tbody>
- 
-      </table>
-      </div>
-      
-    );
-  }
+    function oceni(){
+        
+    }
+
+    const [datatable, setDatatable] = React.useState({
+       
+        columns: [
+          {
+            label: 'id',
+            field: 'id',
+            width: 150,
+          },
+          {
+            label: 'student',
+            field: 'student',
+            width: 200,
+          },
+          {
+            label: 'zadatak',
+            field: 'zadatak',
+            width: 270,
+          },
+          {
+            label: 'datum_predaje',
+            field: 'datum_predaje',
+            width: 270,
+          },
+          {
+            label: 'rad',
+            field: 'rad',
+            width: 270,
+          },
+          {
+            label: 'oceni_rad',
+            field: 'oceni_rad',
+            width: 270,
+          }
+           
+        ],
+        rows:  radovi.map(r=>{
+            return{
+              id: r.id,
+              student:r.student.name,
+              zadatak:r.zadatak.tema,
+              datum_predaje:   r.datum_predaje,
+              rad: <a href={`http://127.0.0.1:8000/uploads/${r.file.file_name}`} download target={'_blank'}>OTVORI</a> ,
+              oceni_rad: <><input type="text" /><button className='btn' onClick={()=>oceni}>Oceni</button></>
+            }
+            
+    
+        })
+       
+    })      
+        
+    
+      return <div className='container'><MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable} /></div>;
+    }
+
   
   export default Radovi;
   
