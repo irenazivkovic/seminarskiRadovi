@@ -16,7 +16,7 @@ class CreateRadsTable extends Migration
         Schema::create('rads', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student');
-            $table->foreignId('profesor');
+            $table->foreignId('zadatak_id');
             $table->date('datum_predaje');
             $table->foreignId('file_id')->nullable();
  

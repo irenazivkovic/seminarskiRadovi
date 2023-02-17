@@ -24,7 +24,7 @@ class FileController extends Controller
                 'files.*' => 'required|mimes:pdf|max:2048',
                 'datum_predaje' => 'required|string|max:30', 
                 'student' => 'required|integer|exists:users,id',
-                'profesor' => 'required|integer|exists:users,id', 
+                'zadatak_id' => 'required|integer|exists:zadataks,id', 
             ]
         );
  
@@ -46,7 +46,7 @@ class FileController extends Controller
           Rad::create([
                 'datum_predaje' => $request->datum_predaje, 
                 'student' => $request->student, 
-                'profesor' => $request->profesor,
+                'zadatak_id' => $request->zadatak_id,
                 'file_id' => $fajl->id,
     
             ]);    

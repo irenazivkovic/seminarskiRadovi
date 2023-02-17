@@ -1,8 +1,14 @@
  
-import { BsPaperclip ,BsSearch} from 'react-icons/bs';
- import React from 'react';
+import { BsPaperclip } from 'react-icons/bs';
+ import React, { useState } from 'react';
+import { Modal } from 'bootstrap';
+import axios from 'axios';
  
  function Zadaci({zadaci}) {
+    
+    const [zadatak_za_modal, setZadatakModal] = useState(null); // zadatak za koji se predaje rad u modalu
+
+
     let sortiranoRastuce = true;
     function sortirajPoRoku() {
         let tabela = document.getElementById("zadaciTabela").getElementsByTagName('tbody')[0];
@@ -46,47 +52,125 @@ import { BsPaperclip ,BsSearch} from 'react-icons/bs';
           }
         }
       }
+    
+         
+   function formatDate() {
+    var d = new Date(),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+    }
+    var danasnjiDatum = formatDate();
+
+
+
+    // file validation
+    function fileValidate(file) {
+    
+
+     if (file.type === "application/pdf") {
+       console.log("Odabrani fajl je PDF.");
+         return true;
+     } else {
+       console.log("Odabrani fajl nije PDF.");
+        return false;
+     }
+    }
+    const [fajlovi,setFajlovi]=useState([]);
+    const handleInput = (e) =>{
+        const filesArray = [];
+        let isValid = "";
+    
+        for (let i = 0; i < e.target.files.length; i++) {
+        isValid = fileValidate(e.target.files[i]);
+        if(isValid){
+            filesArray.push(e.target.files[i]);
+        }
+            
+        }
+        setFajlovi(filesArray)
+        
+    }
+
+    function predajRad(zadatak){
+        
+        const data = new FormData();
+        for (let i = 0; i < fajlovi.length; i++) {
+            data.append("files[]", fajlovi[i]);
+        }
       
-      
+
+        data.append("datum_predaje",danasnjiDatum);
+        data.append("student",sessionStorage.getItem("auth_id"));
+        data.append("zadatak_id",zadatak.id);
+
+        var config = {
+            method: 'post',
+            url: 'http://127.0.0.1:8000/api/files',
+            data:data,
+            headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`},
+        };  
+        
+        axios(config).then(res => {   //zahtev koji samo cuva sliku u bazi
+            
+            console.log(res) 
+
+            if(res.status === 200){
+            alert("uspeh")
+            }else { 
+                alert("greska")
+            }
+         
+    }); 
+
+}
     return (
         
-             
+           
             <div className="zadaci">
                     <h1>Zadaci za predaju</h1>
                     
-                    <div class="input-group">
-                    <div class="form-outline">
-                        <input type="search"   class="form-control" id="pretraga"/>
-                        <label class="form-label" for="form1">Search</label>
+                    <div className="input-group">
+                    <div className="form-outline">
+                        <input type="search"   className="form-control" id="pretraga" onChange={pretraziPoTemi}/>
+                        <label className="form-label" htmlFor="form1">Search</label>
                     </div>
                
                     </div>
                     <button className="btn btn-primary" onClick={sortirajPoRoku}>Sortiraj po roku</button>
-              <table id="zadaciTabela" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+              <table id="zadaciTabela" className="table table-striped table-bordered table-sm" cellSpacing="0" width="100%">
                     <thead>
                         <tr>
-                        <th class="th-sm">ID
+                        <th className="th-sm">ID
                         </th>
-                        <th class="th-sm">Tema
+                        <th className="th-sm">Tema
                         </th>
-                        <th class="th-sm">Rok
+                        <th className="th-sm">Rok
                         </th>
-                        <th class="th-sm">Profesor
+                        <th className="th-sm">Profesor
                         </th>
-                        <th class="th-sm">Predaj
+                        <th className="th-sm">Predaj
                         </th>
  
                         </tr>
                     </thead>
                     <tbody>
-                    { zadaci .map((z) => (  <tr key={z.id}><td>{z.id}</td> <td>{z.tema}</td><td>{z.rok}</td> <td>{z.profesor.name}</td><td><button className='dugme'>Predaj<BsPaperclip></BsPaperclip></button></td></tr>  ))}
+                           
+                    { zadaci .map((z) => (  <tr key={z.id}><td>{z.id}</td><td>{z.tema}</td><td>{z.rok}</td><td>{z.profesor.name}</td><td><button className='dugme' onClick={()=>predajRad(z)}>Predaj<BsPaperclip></BsPaperclip></button><input type="file" id="inputImage" name="file" placeholder="Unesi rad u pdf formatu" className="kupi-kurs" required onChange={handleInput}/></td></tr>  ))}
 
                     </tbody>
                 </table> 
                
     
         </div>
-       
+        
     );
   }
   

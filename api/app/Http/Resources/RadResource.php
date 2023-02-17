@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\User;
+use App\Models\Zadatak;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RadResource extends JsonResource
@@ -18,7 +19,7 @@ class RadResource extends JsonResource
         return [
             'id' => $this->id,
             'student' => User::find($this->student),
-            'profesor' => User::find($this->profesor),
+            'zadatak' =>new ZadatakResource( Zadatak::find($this->zadatak_id)),
             'datum_predaje' => $this->datum_predaje->format('Y-m-d'),
             'naziv' => $this->naziv,
              

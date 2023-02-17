@@ -41,7 +41,7 @@ class RadController extends Controller
  
             'naziv' => 'required|string',
             'student'=>'required|integer|exists:users,id',
-            'profesor'=>'required|integer|exists:users,id',
+            'zadatak_id'=>'required|integer|exists:zadataks,id',
              
             'datum_predaje' => 'required|date', 
 
@@ -53,7 +53,7 @@ class RadController extends Controller
         $d = Rad::create([
             'naziv' => $request->naziv, 
             'student' => $request->student, 
-            'profesor' => $request->profesor,
+            'zadatak_id' => $request->zadatak_id,
  
             'datum_predaje' => $request->datum_predaje,
  
