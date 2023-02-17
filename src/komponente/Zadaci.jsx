@@ -118,7 +118,7 @@ import axios from 'axios';
             headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`},
         };  
         
-        axios(config).then(res => {   //zahtev koji samo cuva sliku u bazi
+        axios(config).then(res => {  
             
             console.log(res) 
 

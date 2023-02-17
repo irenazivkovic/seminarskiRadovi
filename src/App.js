@@ -9,6 +9,7 @@ import React from 'react';
 import RegisterPage from './komponente/RegisterPage';
 import Zadaci from './komponente/Zadaci';
 import axios from 'axios';
+import AdminPocetna from './komponente/AdminPocetna';
  
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -44,6 +45,8 @@ function App() {
             <Route path="/zadaci" element={<Zadaci  zadaci={zadaci}></Zadaci>}></Route>
 
              
+            <Route path="/admin" element={<AdminPocetna  zadaci={zadaci}></AdminPocetna>}></Route>
+          
            
           </Routes>
     
