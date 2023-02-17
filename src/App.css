@@ -71,3 +71,33 @@ tr>th{
 .container{
   margin-top: 10%;
 }
+
+.wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  width: 30%;
+  height: 100px;
+}
+
+.pink {
+  background-color: #ffc0cb;
+}
+
+.green {
+  background-color: #90ee90;
+}
+
+.blue {
+  background-color: #add8e6;
+}

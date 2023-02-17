@@ -13,6 +13,7 @@ import AdminPocetna from './komponente/AdminPocetna';
 import Dodaj from './komponente/Dodaj';
 import Azuriraj from './komponente/Azuriraj';
 import Radovi from './komponente/Radovi';
+import Statistike from './komponente/Statistike';
  
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -21,6 +22,7 @@ function App() {
   const[token,setToken] = useState(null);
   const [zadaci,setZadaci] = useState([ ])
   const [radovi,setRadovi] = useState([ ])
+  const [komentari,setKomentari] = useState([ ])
  
 
   useEffect(() => {
@@ -48,14 +50,29 @@ function App() {
           }
         );
         setRadovi(res.data.data);
-        console.log(res.data)
+        console.log(radovi)
       } catch (err) {
         console.log(err);
       }
     };
     getRadovi();
   }, [ axiosInstance]);
-
+  useEffect(() => {
+    const getKomentari = async () => {
+      try {
+        const res = await axiosInstance.get( "http://127.0.0.1:8000/api/komentar",
+          {
+            headers:{'Authorization': `Bearer ${ window.sessionStorage.getItem('auth_token')}`},
+          }
+        );
+        setKomentari(res.data.data);
+        console.log(res.data)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getKomentari();
+  }, [ axiosInstance]);
 
   function obrisi(id){
   
@@ -105,6 +122,7 @@ function App() {
             <Route path="/admin/radovi" element={<Radovi radovi={radovi}   zadatak={zadatakZaPrikazRadova}></Radovi>}></Route>
 
             <Route path="/admin/azuriraj" element={<Azuriraj zadatak={zadatakZaAzuriranje}></Azuriraj>}></Route>
+            <Route path="/admin/statistike" element={<Statistike  radovi={radovi} zadaci={zadaci} komentari={komentari}></Statistike>}></Route>
 
             <Route path="/admin/dodaj" element={<Dodaj></Dodaj>}></Route>
             <Route path="/admin" element={<AdminPocetna  zadaci={zadaci} obrisi={obrisi} setZadatakAzuriraj={setZadatakAzuriraj} setZadatakRadovi={setZadatakRadovi}></AdminPocetna>}></Route>

@@ -1,6 +1,8 @@
 import { BsFillTrashFill, BsPencilFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlinePlus ,AiFillFolder} from 'react-icons/ai';
+import { BiStats } from 'react-icons/bi';
+
 import React from 'react';
 function AdminPocetna({zadaci,obrisi,setZadatakAzuriraj,setZadatakRadovi}) {
     let navigate = useNavigate();
@@ -18,12 +20,16 @@ function AdminPocetna({zadaci,obrisi,setZadatakAzuriraj,setZadatakRadovi}) {
 
         navigate("/admin/radovi/");
     }
+    function statistike(){
+
+        navigate("/admin/statistike/");
+    }
     console.log(zadaci.filter((z)=>z.profesor.id==window.sessionStorage.getItem("auth_id")))
     return (
   
       <div className='container'>
            <button className="btn btn-primary" onClick={dodaj}><AiOutlinePlus></AiOutlinePlus>Dodaj</button>
-        
+           <button className="btn btn-primary" onClick={statistike}><BiStats></BiStats>Statistike</button>
 
         <table id="dtBasicExample" className="table table-striped table-bordered table-sm" cellSpacing="0" width="100%">
           <thead>
