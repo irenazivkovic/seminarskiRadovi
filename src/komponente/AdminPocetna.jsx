@@ -1,9 +1,12 @@
 import { BsFillTrashFill, BsPencilFill } from 'react-icons/bs';
- 
- 
+import { useNavigate } from 'react-router-dom';
+import { AiOutlinePlus } from 'react-icons/ai';
 import React from 'react';
 function AdminPocetna({zadaci,obrisi}) {
- 
+    let navigate = useNavigate();
+    function dodaj(){
+        navigate("/admin/dodaj/");
+    }
     function azuriraj(id){
 
         
@@ -12,6 +15,9 @@ function AdminPocetna({zadaci,obrisi}) {
     return (
   
       <div className='container'>
+           <button className="btn btn-primary" onClick={dodaj}><AiOutlinePlus></AiOutlinePlus>Dodaj</button>
+        
+
         <table id="dtBasicExample" className="table table-striped table-bordered table-sm" cellSpacing="0" width="100%">
           <thead>
             <tr>

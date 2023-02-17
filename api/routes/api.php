@@ -44,13 +44,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 });
 
+Route::post("/zadatak",[ZadatakController::class,'store']);
 
 Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){ //ako je ulogovan admin
 
 
     Route::post("/komentar",[KomentarController::class,'store']);
 
-    Route::post("/zadatak",[ZadatakController::class,'store']);
     Route::put("/zadatak/{id}",[ZadatakController::class,'update']);
     Route::delete("/zadatak/{id}",[ZadatakController::class,'destroy']);
     Route::post("/logout",[AutfController::class,'logout']);

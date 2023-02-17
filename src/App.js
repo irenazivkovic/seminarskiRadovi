@@ -10,6 +10,7 @@ import RegisterPage from './komponente/RegisterPage';
 import Zadaci from './komponente/Zadaci';
 import axios from 'axios';
 import AdminPocetna from './komponente/AdminPocetna';
+import Dodaj from './komponente/Dodaj';
  
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -76,7 +77,7 @@ function App() {
             <Route path="/register" element={<RegisterPage  ></RegisterPage>}></Route>
             <Route path="/zadaci" element={<Zadaci  zadaci={zadaci}></Zadaci>}></Route>
 
-             
+            <Route path="/admin/dodaj" element={<Dodaj></Dodaj>}></Route>
             <Route path="/admin" element={<AdminPocetna  zadaci={zadaci} obrisi={obrisi}></AdminPocetna>}></Route>
           
            
