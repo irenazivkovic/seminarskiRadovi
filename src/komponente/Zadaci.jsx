@@ -1,5 +1,5 @@
  
-import { BsPaperclip } from 'react-icons/bs';
+import { BsPaperclip ,BsSearch} from 'react-icons/bs';
  import React from 'react';
  
  function Zadaci({zadaci}) {
@@ -30,7 +30,22 @@ import { BsPaperclip } from 'react-icons/bs';
         }
       }
  
- 
+      function pretraziPoTemi() {
+        let tabela = document.getElementById("zadaciTabela").getElementsByTagName('tbody')[0];
+        let input = document.getElementById("pretraga");
+        let filter = input.value.toUpperCase();
+        let redovi = tabela.rows;
+      
+        for (let i = 0; i < redovi.length; i++) {
+          let ćelijaTeme = redovi[i].cells[1];
+          let vrednostTeme = ćelijaTeme.textContent || ćelijaTeme.innerText;
+          if (vrednostTeme.toUpperCase().indexOf(filter) > -1) {
+            redovi[i].style.display = "";
+          } else {
+            redovi[i].style.display = "none";
+          }
+        }
+      }
       
       
     return (
@@ -38,6 +53,14 @@ import { BsPaperclip } from 'react-icons/bs';
              
             <div className="zadaci">
                     <h1>Zadaci za predaju</h1>
+                    
+                    <div class="input-group">
+                    <div class="form-outline">
+                        <input type="search"   class="form-control" id="pretraga"/>
+                        <label class="form-label" for="form1">Search</label>
+                    </div>
+               
+                    </div>
                     <button className="btn btn-primary" onClick={sortirajPoRoku}>Sortiraj po roku</button>
               <table id="zadaciTabela" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                     <thead>
@@ -60,7 +83,7 @@ import { BsPaperclip } from 'react-icons/bs';
 
                     </tbody>
                 </table> 
-                
+               
     
         </div>
        
