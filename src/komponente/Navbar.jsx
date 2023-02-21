@@ -2,7 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import React from 'react';
-function Navbar({token}) {
+function Navbar({token,setToken}) {
   const navigate = useNavigate();
  
   function handleLogout(){ 
@@ -25,7 +25,7 @@ function Navbar({token}) {
       window.sessionStorage.setItem('auth_id',null); 
       navigate('/');
       sessionStorage.clear();
-     
+      setToken(null)
 
     })
     .catch(function (error) {

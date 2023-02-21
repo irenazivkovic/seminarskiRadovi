@@ -113,7 +113,7 @@ function App() {
   return (
     <div className="App">
         <BrowserRouter  >
-          <Navbar token={token} ></Navbar>
+          <Navbar token={token} setToken={setToken} ></Navbar>
           <Routes>
             <Route path="/" element={<LoginPage addToken={setToken}></LoginPage>}></Route>
             <Route path="/register" element={<RegisterPage  ></RegisterPage>}></Route>
